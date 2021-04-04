@@ -1,0 +1,6 @@
+grant {
+	permission java.net.SocketPermission "*:1024-", "connect, resolve, accept";
+	permission java.net.SocketPermission "127.0.0.1:1099", "connect, resolve, accept";
+	permission java.net.SocketPermission "*:80", "connect";
+	permission java.io.FilePermission "C:/users/demko/Desktop/-", "read";
+};

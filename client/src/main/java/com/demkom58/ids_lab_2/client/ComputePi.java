@@ -1,10 +1,8 @@
 package com.demkom58.ids_lab_2.client;
 
 import com.demkom58.ids_lab_2.compute.Compute;
-import com.demkom58.ids_lab_2.compute.util.StringUtil;
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.rmi.Naming;
 
 public class ComputePi {
@@ -25,8 +23,7 @@ public class ComputePi {
     }
 
     public static void applySecurityManager() {
-        final URL policyUrl = ComputePi.class.getResource("/rmi.policy");
-        System.setProperty("java.security.policy", StringUtil.toPathString(policyUrl));
+        System.setProperty("java.security.policy", "C:/users/demko/Desktop/rmi.policy");
 
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
