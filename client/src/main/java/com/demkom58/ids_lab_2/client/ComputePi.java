@@ -3,6 +3,7 @@ package com.demkom58.ids_lab_2.client;
 import com.demkom58.ids_lab_2.compute.Compute;
 
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.rmi.Naming;
 
 public class ComputePi {
@@ -23,10 +24,8 @@ public class ComputePi {
     }
 
     public static void applySecurityManager() {
-        System.setProperty("java.security.policy", "C:/users/demko/Desktop/rmi.policy");
-
-        if (System.getSecurityManager() == null) {
+        System.setProperty("java.security.policy", Paths.get(".", "rmi.policy").toAbsolutePath().toString());
+        if (System.getSecurityManager() == null)
             System.setSecurityManager(new SecurityManager());
-        }
     }
 }
