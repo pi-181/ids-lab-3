@@ -2,6 +2,7 @@ package com.demkom58.ids_lab_2.engine;
 
 import com.demkom58.ids_lab_2.compute.Compute;
 import com.demkom58.ids_lab_2.compute.task.Task;
+import com.demkom58.ids_lab_2.compute.util.Opt;
 
 import java.nio.file.Paths;
 import java.rmi.Naming;
@@ -25,7 +26,7 @@ public class ComputeEngine extends UnicastRemoteObject implements Compute {
     }
 
     @Override
-    public Object executeTask(Task task) throws RemoteException {
+    public Opt<String> executeTask(Task task) throws RemoteException {
         return task.execute();
     }
 

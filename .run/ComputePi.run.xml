@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ComputePi" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="com.demkom58.ids_lab_2.client.ComputePi" />
+  <configuration default="false" name="ComputeMd5" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.demkom58.ids_lab_2.client.ComputeMd5" />
     <module name="ids_lab_2.client.main" />
     <option name="PROGRAM_PARAMETERS" value="30" />
     <option name="VM_PARAMETERS" value="-Djava.rmi.server.codebase=&quot;file:///&quot;$PROJECT_DIR$/client/build/libs/client-1.0-SNAPSHOT.jar&quot;&quot;" />
