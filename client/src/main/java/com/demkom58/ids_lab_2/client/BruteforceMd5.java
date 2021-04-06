@@ -33,21 +33,15 @@ public class BruteforceMd5 implements Task {
     @Override
     @SneakyThrows
     public Opt<String> execute() {
-        final OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream("table.txt"));
-
-        final Opt<String> md5
-                = bruteforce(out, MessageDigest.getInstance("MD5"), new StringBuilder(slice[0]), 0, target);
-        out.flush();
-        out.close();
-
-        if (md5.isPresent() && md5.get().equals(""))
+        try {
+            return bruteforce(MessageDigest.getInstance("MD5"), new StringBuilder(slice[0]), 0, target);
+        } catch (IllegalArgumentException e) {
             return Opt.empty();
-
-        return md5;
+        }
     }
 
     @SneakyThrows
-    private Opt<String> bruteforce(OutputStreamWriter out, MessageDigest algo, StringBuilder builder, int i, String target) {
+    private Opt<String> bruteforce(MessageDigest algo, StringBuilder builder, int i, String target) {
         final char s = range[0].charAt(i);
         final char e = range[1].charAt(i);
 
@@ -60,7 +54,7 @@ public class BruteforceMd5 implements Task {
             builder.setCharAt(i, c);
 
             if (i < length - 1) {
-                final Opt<String> result = bruteforce(out, algo, builder, i + 1, target);
+                final Opt<String> result = bruteforce(algo, builder, i + 1, target);
                 if (result.isPresent())
                     return result;
                 else
@@ -69,10 +63,9 @@ public class BruteforceMd5 implements Task {
 
             final String comb = builder.toString();
             final String md5 = DatatypeConverter.printHexBinary(algo.digest(comb.getBytes()));
-            out.write(comb + " : " + i + " : " + md5 + "\n");
 
             if (target.equals(md5)) return Opt.of(comb);
-            if (comb.equals(slice[1])) return Opt.of("");
+            if (comb.equals(slice[1])) throw new IllegalArgumentException("Hash not found in this slices!");
         }
 
         return Opt.empty();
