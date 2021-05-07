@@ -3,7 +3,7 @@
     <option name="MAIN_CLASS_NAME" value="com.demkom58.ids_lab_2.client.ComputeMd5" />
     <module name="ids_lab_2.client.main" />
     <option name="PROGRAM_PARAMETERS" value="30" />
-    <option name="VM_PARAMETERS" value="-Djava.rmi.server.codebase=&quot;file:///&quot;$PROJECT_DIR$/client/build/libs/client-1.0-SNAPSHOT.jar&quot;&quot;" />
+    <option name="VM_PARAMETERS" value="-Djava.rmi.server.codebase=&quot;file:///&quot;$PROJECT_DIR$/client/build/libs/client-1.0-SNAPSHOT.jar&quot;&quot; -Djava.security.policy=&quot;$PROJECT_DIR$/run/rmi.policy&quot;" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
     <extension name="coverage">
       <pattern>

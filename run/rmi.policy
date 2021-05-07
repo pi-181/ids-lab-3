@@ -1,6 +1,5 @@
 grant {
-	permission java.net.SocketPermission "*:1024-", "connect, resolve, accept";
-	permission java.net.SocketPermission "127.0.0.1:1099", "connect, resolve, accept";
-	permission java.net.SocketPermission "*:80", "connect";
+	permission java.net.SocketPermission "", "connect, resolve, accept";
+	permission java.net.SocketPermission "26.26.70.176", "connect, resolve, accept";
     permission java.io.FilePermission "<<ALL FILES>>", "read,execute,write";
 };

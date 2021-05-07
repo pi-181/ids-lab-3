@@ -15,9 +15,15 @@ public class ComputeEngine extends UnicastRemoteObject implements Compute {
     private static final String SERVICE_NAME = "rmi://localhost/Compute";
 
     public static void main(String[] args) throws Exception {
+        final int id = args.length > 0 && args[0] != null ? Integer.parseInt(args[0]) : 1;
+        final String name = SERVICE_NAME + id;
+
         applySecurityManager();
-        LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-        Naming.rebind(SERVICE_NAME, new ComputeEngine());
+
+        if (id == 1)
+            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+
+        Naming.rebind(name, new ComputeEngine());
         System.out.println("ComputeEngine bound");
     }
 

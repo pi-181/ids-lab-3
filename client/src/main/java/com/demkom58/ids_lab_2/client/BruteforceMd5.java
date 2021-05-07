@@ -5,8 +5,6 @@ import com.demkom58.ids_lab_2.compute.util.Opt;
 import lombok.SneakyThrows;
 
 import javax.xml.bind.DatatypeConverter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.security.MessageDigest;
 
 public class BruteforceMd5 implements Task {

@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ComputeEngine1" type="Application" factoryName="Application">
+  <configuration default="false" name="ComputeEngine3" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.demkom58.ids_lab_2.engine.ComputeEngine" />
     <module name="ids_lab_2.engine.main" />
-    <option name="PROGRAM_PARAMETERS" value="1" />
+    <option name="PROGRAM_PARAMETERS" value="3" />
     <option name="VM_PARAMETERS" value="-Djava.rmi.server.useCodebaseOnly=false" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
     <extension name="coverage">
@@ -13,8 +13,8 @@
     </extension>
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="Gradle.BeforeRunTask" enabled="true" tasks="jar" externalProjectPath="$PROJECT_DIR$/compute" vmOptions="" scriptParameters="" />
-      <option name="Gradle.BeforeRunTask" enabled="true" tasks="jar" externalProjectPath="$PROJECT_DIR$/engine" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks="jar" externalProjectPath="$PROJECT_DIR$/compute" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks="jar" externalProjectPath="$PROJECT_DIR$/engine" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>
