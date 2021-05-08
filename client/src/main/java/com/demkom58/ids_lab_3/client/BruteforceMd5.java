@@ -1,13 +1,11 @@
-package com.demkom58.ids_lab_2.client;
+package com.demkom58.ids_lab_3.client;
 
-import com.demkom58.ids_lab_2.compute.task.Task;
-import com.demkom58.ids_lab_2.compute.util.Opt;
 import lombok.SneakyThrows;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 
-public class BruteforceMd5 implements Task {
+public class BruteforceMd5 {
     private final int length;
     private final String[] slice;
     private final String[] range;
@@ -28,12 +26,11 @@ public class BruteforceMd5 implements Task {
         this.read = new boolean[length];
     }
 
-    @Override
     @SneakyThrows
     public Opt<String> execute() {
         try {
             return bruteforce(MessageDigest.getInstance("MD5"), new StringBuilder(slice[0]), 0, target);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return Opt.empty();
         }
     }
@@ -66,6 +63,7 @@ public class BruteforceMd5 implements Task {
             if (comb.equals(slice[1])) throw new IllegalArgumentException("Hash not found in this slices!");
         }
 
+        if (Thread.currentThread().isInterrupted()) throw new IllegalArgumentException("Bruteforce was interrupted!");
         return Opt.empty();
     }
 

@@ -1,4 +1,4 @@
-package com.demkom58.ids_lab_2.client;
+package com.demkom58.ids_lab_3.client;
 
 import java.util.stream.IntStream;
 

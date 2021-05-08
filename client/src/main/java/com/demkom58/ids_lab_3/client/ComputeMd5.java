@@ -1,11 +1,7 @@
-package com.demkom58.ids_lab_2.client;
+package com.demkom58.ids_lab_3.client;
 
-import com.demkom58.ids_lab_2.compute.Compute;
-import com.demkom58.ids_lab_2.compute.util.Opt;
 import lombok.SneakyThrows;
 
-import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -15,7 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ComputeMd5 {
-    private static final String SERVICE_NAME = "rmi://localhost/Compute";
 
     @SneakyThrows
     public static void main(String[] args) {
@@ -29,10 +24,8 @@ public class ComputeMd5 {
         final String[] slices = dataSlicer.slice();
         System.out.println(Arrays.toString(slices));
 
-        final List<Compute> shards = lookupShards(totalShards);
-
         final long startTime = System.nanoTime();
-        final Opt<String> result = distributedBruteforce(shards, slices, new String[] {start, end}, target);
+        final Opt<String> result = distributedBruteforce(slices, new String[]{start, end}, target);
         final long endTime = System.nanoTime();
 
         System.out.println(
@@ -41,43 +34,26 @@ public class ComputeMd5 {
         );
     }
 
-    private static List<Compute> lookupShards(int totalShards) {
-        final List<Compute> computes = new ArrayList<>();
-        for (int i = 0; i < totalShards; i++) {
-            try {
-                final String name = SERVICE_NAME + (i + 1);
-                computes.add((Compute) Naming.lookup(name));
-                System.out.println("Found compute host: " + name);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return computes;
-    }
-
     @SneakyThrows
-    private static Opt<String> distributedBruteforce(List<Compute> computes, String[] slices, String[] range, String target) {
-        if (computes.isEmpty()) {
-            System.out.println("Not found available compute hosts!");
+    private static Opt<String> distributedBruteforce(String[] slices, String[] range, String target) {
+        int threads = slices.length - 1;
+        if (threads == 0) {
+            System.out.println("To small thread count!");
             return Opt.empty();
         }
-        final ExecutorService executorService = Executors.newFixedThreadPool(computes.size());
-        List<Future<Opt<String>>> futures = new ArrayList<>(computes.size());
-        for (int i = 0; i < computes.size(); i++) {
-            final Compute compute = computes.get(i);
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(threads);
+        List<Future<Opt<String>>> futures = new ArrayList<>(threads);
+        for (int i = 0; i < threads; i++) {
             final String[] slice = {slices[i], slices[i + 1]};
             final BruteforceMd5 task = new BruteforceMd5(slice, range, target);
 
             final int shard = i + 1;
             futures.add(executorService.submit(() -> {
-                try {
-                    System.out.println("Compute " + shard + " started!");
-                    final Opt<String> stringOpt = compute.executeTask(task);
-                    System.out.println("Compute " + shard + " done work!");
-                    return stringOpt;
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("Compute " + shard + " started!");
+                final Opt<String> stringOpt = task.execute();
+                System.out.println("Compute " + shard + " done work!");
+                return stringOpt;
             }));
         }
 

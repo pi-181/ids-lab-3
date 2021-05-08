@@ -1,4 +1,4 @@
-package com.demkom58.ids_lab_2.compute.util;
+package com.demkom58.ids_lab_3.client;
 
 import java.io.Serializable;
 import java.util.NoSuchElementException;
@@ -14,9 +14,9 @@ import java.util.function.Supplier;
  * {@code get()} will return the value.
  *
  * <p>Additional methods that depend on the presence or absence of a contained
- * value are provided, such as {@link #orElse(java.lang.Object) orElse()}
+ * value are provided, such as {@link #orElse(Object) orElse()}
  * (return a default value if value not present) and
- * {@link #ifPresent(java.util.function.Consumer) ifPresent()} (execute a block
+ * {@link #ifPresent(Consumer) ifPresent()} (execute a block
  * of code if the value is present).
  *
  * <p>This is a <a href="../lang/doc-files/ValueBased.html">value-based</a>
