@@ -18,7 +18,7 @@ public class ComputeMd5 {
 
         final String start = "aaaaaa";
         final String end = "zzzzzz";
-        final String target = "03e76a317e61c421affc25aa92895980";
+        final String target = "8d5f88b71d679934fdcdaf2ab4af0812"; // zzzzza
 
         final DataSlicer dataSlicer = new DataSlicer(totalShards, start, end);
         final String[] slices = dataSlicer.slice();
@@ -29,7 +29,7 @@ public class ComputeMd5 {
         final long endTime = System.nanoTime();
 
         System.out.println(
-                result.map(r -> "Result found: " + r + ".").orElse("Result not found!")
+                result.map(r -> "Result found: " + r + " (" + target + ").").orElse("Result not found!")
                         + " For " + (endTime - startTime) + "ns"
         );
     }
